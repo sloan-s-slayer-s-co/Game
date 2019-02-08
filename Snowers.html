@@ -1,0 +1,475 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>SnowBoarders</title>
+</head>
+    
+<style>
+    
+    body{ background-image: linear-gradient(to right, #7F7FD5, #86A8E7, #91EAE4);
+    }
+    
+    p {
+        color: blue;
+        font-size: 40px;
+        text-align: center;
+        font-family: 'bebas';
+    }
+    div1 {
+        color: blue;
+        font-size: 30px;
+        margin-left: 600px;
+        font-family: 'bebas';
+        
+    }
+        p1 {
+        color: blue;
+        font-size: 21px;
+        text-align: center;
+        font-family: 'bebas';
+        margin-left: 100px;
+        
+       
+    }
+    
+                button {
+        border: none;
+        background-image: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+        margin-left: 630px;
+        font-size: 35px;
+        text-align: center;
+        font-family: 'bebas';
+        border-radius: 25%;
+       
+    }
+    canvas {
+        margin-left: 220px;
+
+    } 
+</style>
+<body> 
+<section>
+
+<!-- This div is the canvas -->
+   
+    
+
+<div>
+<div1>Snowboard Season</div1>
+<canvas id="canvas" width="1000" height="700" style="border:1px solid #c3c3c3;">
+This text is displayed if your browser does not support HTML5 Canvas.
+</canvas>
+</div>
+    <button onclick="kene()">Play Again
+    </button> 
+    <br>
+<p1>Rules: Move around with the arrow keys and avoid the Artic Animals coming at you. If you have 2 or less hits after 32 seconds you win! Good Luck!</p1>
+
+
+
+<script type="text/javascript">
+
+
+
+var page = true;
+
+
+        
+
+
+
+   
+if (page == true) {
+
+    var canvas;
+    var ctx;
+    var x = 200;
+    var y = 500;
+    var w = 150;
+    var h = 150;
+    var WIDTH = 1000;
+    var HEIGHT = 700;
+    var hit = 0;
+    var TimerCount = 30;
+    var counter = 0;
+    
+    var dy = 200;
+    var dx = 200;
+    var px = 1000;
+    var py = 500;
+    var ppx = 100;
+    var penx = 1000;
+    var peny = 300;
+    var penpx = 100;
+    var sx = 1000;
+    var sy = 100;
+    var ssx = 100;
+    
+    var polarx = 1000;
+    var polary = 500;
+    var polarpx = 100;
+    var penguinx = 1000;
+    var penguiny = 300;
+    var penguinpx = 100;
+    var sasx = 1000;
+    var sasy = 100;
+    var sassx = 100;
+
+
+    	countUP();	
+	function countUP () {
+		counter++;
+		setTimeout ("countUP()", 1000);
+	}
+    
+    function bud(x,y,h,w) {
+        ctx.drawImage(myImage, x, y, w, h);
+
+    }
+        function kene() {
+        counter = 0;
+        hit = 0;
+    }
+
+        function circle(x,y,r) {
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI*2, true);
+        ctx.fill();
+
+    }
+    
+    function Polar(x,y,h,w) {
+        
+        ctx.drawImage(myPolar, x, y, h, w)
+    }
+        function End(x,y,h,w) {
+        
+        ctx.drawImage(myEnd, x, y, h, w)
+    }
+        function Pen(x,y,h,w) {
+        
+        ctx.drawImage(myPenguin, x, y, h, w)
+    }
+        function Seal(x,y,h,w) {
+
+        ctx.drawImage(mySeal, x, y, h, w)
+    }
+        function Win(x,y,h,w) {
+
+        ctx.drawImage(myWin, x, y, h, w)
+    }
+    function ged() {
+        ctx.drawImage(myImae,0,0, WIDTH, HEIGHT);
+        var grd = ctx.createLinearGradient(0, 0, 170, 0);
+        grd.addColorStop(0, "#005AA7");
+        grd.addColorStop(1, "#FFFDE4");
+        ctx.fillStyle = grd;
+        ctx.font = "50px Arial";
+        ctx.fillStyle = grd;
+        ctx.fillText("Hits: " + hit,50,60);
+        ctx.fillText("Stopwatch: " + counter,50,100);
+
+        /*ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI*2, true);
+        ctx.fill();
+        */
+    }
+
+
+    function rect(x,y,w,h) {
+        ctx.beginPath();
+        ctx.rect(x,y,w,h);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+    }
+
+    function clear() {
+        ctx.clearRect(0, 0, WIDTH, HEIGHT);
+    }
+
+    // Important starting function
+    function init() {
+        canvas = document.getElementById("canvas");
+        ctx = canvas.getContext("2d");
+        return setInterval(draw, 10); // this is key, tells draw function to fire 10x per second
+        
+    }
+
+        function doge() {
+        canvas = document.getElementById("canvas");
+        ctx = canvas.getContext("2d");
+        return setInterval(boss, 500); // this is key, tells draw function to fire 10x per second
+
+        }
+    function doKeyDown(evt){
+        switch (evt.keyCode) {
+            case 38:  /* Up arrow was pressed */
+                if (y - 200 > 0){
+                    y -= dy;
+
+                }
+                break;
+            case 40:  /* Down arrow was pressed */
+                if (y + dy < HEIGHT){
+                    y += dy;
+                }
+                break;
+            case 37:  /* Left arrow was pressed */
+               myImage.src = "didL.png";
+
+                if (x - dx > 0){
+                    x -= dx;
+
+                }
+                break;
+            case 39:  /* Right arrow was pressed */
+                myImage.src = "did.png"; 
+
+
+                if (x + dx < WIDTH){
+                    x += dx;
+
+                }
+                break;
+            }
+    }
+
+    function draw() {
+        clear();
+        ctx.fillStyle = "white";
+        ctx.strokeStyle = "black";
+        //rect(0,0,WIDTH,HEIGHT);
+        ged();
+        bud(x, y, h, w);
+        ctx.fillStyle = "blue";
+        
+        if (counter > 5 && counter < 20) {
+             if (x != px || y != py){ 
+                if (px > 50) {
+                    Polar(px, py, 150, 120);
+                }
+             }
+             if (x == px && y == py) {
+                hit++;
+                px = 6000;
+            } 
+        }
+        if (counter > 2 && counter < 21){
+            if (x != penx || y != peny ) {
+                if (penx > 50) {
+                Pen(penx, peny, 140, 120); 
+                }
+            }
+            if (x == penx && y == peny) {
+                hit++;
+                penx = 6000;
+            }  
+        }
+             
+        if (counter > 5 && counter < 24){
+            if (x != sx || y != sy ) {
+                if (sx > 50) {
+                Seal(sx, sy, 160, 100); 
+                }
+            }
+            if (x == sx && y == sy) {
+                hit++;
+                sx = 6000;
+            }  
+        }
+        
+                if (counter > 10 && counter < 25) {
+             if (x != polarx || y != polary){ 
+                if (polarx > 50) {
+                    Polar(polarx, polary, 150, 120);
+                    var a = Math.random()*canvas.width;
+                }
+             }
+             if (x == polarx && y == polary) {
+                hit++;
+                polarx = 6000;
+            } 
+        }
+        if (counter > 13 && counter < 26 ){
+            if (x != penguinx || y != penguiny ) {
+                if (penguinx > 50) {
+                Pen(penguinx, penguiny, 140, 120); 
+                }
+            }
+            if (x == penguinx && y == penguiny) {
+                hit++;
+                penguinx = 6000;
+            }  
+        }
+             
+        if (counter > 10 && counter < 24){
+            if (x != sasx || y != sasy ) {
+                if (sasx > 50) {
+                Seal(sasx, sasy, 160, 100); 
+                }
+            }
+            if (x == sasx && y == sasy) {
+                hit++;
+                sasx = 6000;
+            }  
+        }
+                  if (counter > 20) {
+             if (x != px || y != py){ 
+                if (px > 50) {
+                    Polar(px, py, 150, 120);
+                }
+             }
+             if (x == px && y == py) {
+                hit++;
+                px = 6000;
+            } 
+        }
+        if (counter > 21 ){
+            if (x != penx || y != peny ) {
+                if (penx > 50) {
+                Pen(penx, peny, 140, 120); 
+                }
+            }
+            if (x == penx && y == peny) {
+                hit++;
+                penx = 6000;
+            }  
+        }
+             
+        if (counter > 22 ){
+            if (x != sx || y != sy ) {
+                if (sx > 50) {
+                Seal(sx, sy, 160, 100); 
+                }
+            }
+            if (x == sx && y == sy) {
+                hit++;
+                sx = 6000;
+            }  
+        }
+        
+                if (counter > 25) {
+             if (x != polarx || y != polary){ 
+                if (polarx > 50) {
+                    Polar(polarx, polary, 150, 120);
+                }
+             }
+             if (x == polarx && y == polary) {
+                hit++;
+                polarx = 6000;
+            } 
+        }
+        if (counter > 26 ){
+            if (x != penguinx || y != penguiny ) {
+                if (penguinx > 50) {
+                Pen(penguinx, penguiny, 140, 120); 
+                }
+            }
+            if (x == penguinx && y == penguiny) {
+                hit++;
+                penguinx = 6000;
+            }  
+        }
+             
+        if (counter > 29){
+            if (x != sasx || y != sasy ) {
+                if (sasx > 50) {
+                Seal(sasx, sasy, 160, 100); 
+                }
+            }
+            if (x == sasx && y == sasy) {
+                hit++;
+                sasx = 6000;
+            }  
+        }
+        
+        if (counter == 20) {
+            px = 1000;
+        }
+                if (counter == 21) {
+            penx = 1000;
+        }
+                if (counter == 24) {
+            sx = 1000;
+        }
+                if (counter == 25) {
+            polarx = 1000;
+        }
+                if (counter == 26) {
+            penguinx = 1000;
+        }
+                if (counter == 2) {
+            sasx = 1000;
+        }
+
+                    if (counter > 32 && hit > 2){
+           End(0,0,1000,700) 
+
+
+        }
+                    if (counter > 32 && hit < 2){
+           Win(0,0,1000,700) 
+                     
+        }
+
+
+
+    }
+    
+
+        function boss() {
+
+         if (counter > 5) {
+            px -= ppx;
+         }
+        if (counter > 2) {
+            penx -= penpx;
+         }
+        if (counter > 5) {
+            sx -= ssx;
+         }
+        if (counter > 10) {
+            polarx -= polarpx;
+         }
+        if (counter > 13) {
+            penguinx -= penguinpx;
+         }
+        if (counter > 10) {
+            sasx -= sassx;
+         }
+
+        }
+
+
+    var myImage = new Image();
+    var myImae = new Image();
+    var myPolar = new Image();
+    var myPenguin = new Image();
+    var mySeal = new Image();
+    var myEnd = new Image();
+    var myWin = new Image();
+    myImae.src = "novus.jpg";
+    myImage.src = "did.png";
+    myPolar.src = "Olar.png";
+    myPenguin.src = "Penguin.png";
+    mySeal.src = "seal.png";
+    myEnd.src = "end.png";
+    myWin.src = "win.jpg";
+    
+
+
+    // Main part of program
+    init();
+    doge();
+    window.addEventListener('keydown',doKeyDown,true);
+}
+    
+
+
+</script>
+</section>
+</body>
+</html>
